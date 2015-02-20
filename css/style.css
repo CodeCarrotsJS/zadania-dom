@@ -1,0 +1,57 @@
+body {
+  font-family: Verdana, Arial, sans-serif;
+}
+
+.hidden {
+  display: none;
+}
+
+.main {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+@-webkit-keyframes warkocze {
+  0%	{
+    -webkit-transform: rotate(14deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(-14deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(14deg);
+  }
+}
+
+#ggc-logo {
+ width: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+#ggc-logo.active .plait {
+  -webkit-transform-origin: top center;
+  -webkit-animation: warkocze 2s infinite;
+  animation-timing-function: ease-out;
+}
+
+.hard {
+  font-weight: bold;
+}
+
+#code {
+  background-color: #000;
+  width: 262px;
+  overflow: hidden;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+#code > img {
+  /*margin-left: -510px;*/
+}
