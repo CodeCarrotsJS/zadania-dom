@@ -1,5 +1,5 @@
 window.addEventListener('load', function() {
-	var wsUri = 'ws://127.0.0.1:3000',
+	var wsUri = 'ws://128.199.61.161:3000',
 		webSocket = new WebSocket(wsUri),
 		pass = document.getElementById('password');
 
