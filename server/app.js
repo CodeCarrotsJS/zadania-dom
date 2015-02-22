@@ -30,7 +30,8 @@ server.on('connection', function (socket) {
 
 			connections.forEach(function (connection) {
 				connection.send(JSON.stringify({
-					message: data.message
+					message: data.message,
+					data: data.data || {}
 				}));
 			});
 		}

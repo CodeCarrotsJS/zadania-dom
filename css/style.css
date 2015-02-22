@@ -1,5 +1,8 @@
 body {
   font-family: Verdana, Arial, sans-serif;
+  border-top: 20px solid #fff;
+  margin: 0;
+  transition: border-top-color 1000ms linear;
 }
 
 .hidden {
@@ -9,6 +12,21 @@ body {
 .main {
   margin: 0 auto;
   max-width: 900px;
+}
+
+section {
+  margin-bottom: 60px;
+}
+
+blockquote {
+  color: #fff;
+  font-family: Georgia, Times, serif;
+  font-size: 66px;
+  text-align: center;
+  border: 40px solid #000;
+  margin: 0;
+  padding: 40px;
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("http://www.ilikewallpaper.net/ipad-wallpapers/download/16555/Sunrise-at-sea-ipad-wallpaper-ilikewallpaper_com.jpg");
 }
 
 @-webkit-keyframes warkocze {
