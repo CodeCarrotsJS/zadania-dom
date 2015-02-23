@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "description": "none",
+  "main": "app.js",
+  "dependencies": {
+    "lodash": "^3.3.0",
+    "websocket.io": "^0.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "author": "Artur Delura",
+  "license": "MIT"
+}

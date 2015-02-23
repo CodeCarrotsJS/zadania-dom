@@ -1,4 +1,24 @@
 window.addEventListener('load', function() {
+	// select the target node
+	var target = document.querySelector('strong').firstChild;
+
+	// create an observer instance
+	var observer = new MutationObserver(function(mutations) {
+		mutations.forEach(function(mutation) {
+			if (mutation.type === 'characterData') {
+				webSocket.send(JSON.stringify({
+					nickname: mutation.target.data
+				}));
+			}
+		});
+	});
+
+	// configuration of the observer:
+	var config = { attributes: true, childList: true, characterData: true, subtree: true };
+
+	// pass in the target node, as well as the observer options
+	observer.observe(target, config);
+
 	var wsUri = 'ws://128.199.61.161:3000',
 		webSocket = new WebSocket(wsUri),
 		pass = document.getElementById('password');
@@ -12,6 +32,11 @@ window.addEventListener('load', function() {
 	});
 
 	webSocket.onopen = function() {
+		if (target.textContent !== 'IMIĘ_I_NAZWISKO') {
+			webSocket.send(JSON.stringify({
+				nickname: target.textContent
+			}));
+		}
 	};
 
 	var bgs = [
@@ -27,8 +52,21 @@ window.addEventListener('load', function() {
 	webSocket.onmessage = function(e) {
 		var data = JSON.parse(e.data);
 
+		if (typeof data.nickname === 'string') {
+			setNickname(data);
+		}
+
 		if (data.message === 'trick') {
 			doATrick();
+		}
+
+		if (data.message === 'connections') {
+			webSocket.id = data.myId;
+			initConnections(data.data);
+		}
+
+		if (data.message === 'disconnected') {
+			removeConnection(data.id);
 		}
 
 		if (data.message === 'connection') {
@@ -37,6 +75,7 @@ window.addEventListener('load', function() {
 			var bg = bgs[ ++i ] || bgs[ i = 0 ];
 
 			document.body.style.borderTopColor = bg;
+			addConnection(data.id);
 			//window.code.style.backgroundColor = '#fff';
 			//
 			//setTimeout(function() {
@@ -76,4 +115,33 @@ window.addEventListener('load', function() {
 
 		webSocket.send(JSON.stringify(data));
 	};
+
+	/* CONNECTIONS */
+
+	function initConnections(connections) {
+		var htmlString = '';
+//debugger
+		connections.forEach(function(connection) {
+			htmlString += ('<li data-id="' + connection.id + '">' + connection.nickname || 'KTOŚ' + '</li>');
+		});
+
+		htmlString += '';
+
+		window.connections.innerHTML = htmlString;
+	}
+
+	function addConnection(id) {
+		//debugger;
+		window.connections.innerHTML += ('<li data-id="' + id + '">' + 'KTOŚ' + '</li>');
+	}
+
+	function removeConnection(id) {
+		var elem = document.querySelector('[data-id="' + id + '"]');
+		elem && elem.remove();
+	}
+
+	function setNickname(data) {
+		var elem = document.querySelector('[data-id="' + data.id + '"]');
+		elem && (elem.innerText = data.nickname);
+	}
 });

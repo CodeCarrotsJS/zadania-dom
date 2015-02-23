@@ -73,3 +73,20 @@ h1 {
 #code > img {
   /*margin-left: -510px;*/
 }
+
+ul#connections {
+  position: fixed;
+  top: 0;
+  left: 0;
+  list-style-type: none;
+  /* outline: 1px solid red; */
+  margin: 0;
+  padding: 0;
+  width: 300px;
+}
+
+ul#connections li {
+  text-align: center;
+  padding: 5px;
+  background: beige;
+}
